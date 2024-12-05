@@ -1,0 +1,17 @@
+{
+  "name": "parking-api",
+  "version": "1.0.0",
+  "description": "api for parking pay page",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "type": "modules",
+  "author": "Jose Bastidas",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.46.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.1"
+  }
+}
