@@ -1,9 +1,9 @@
 import React from "react"
 import {useAuth} from "../../contexts/auth_context.jsx"
 import {useNavigate} from "react-router-dom"
-import {AdminHome} from "../../components/home-page"
-import {ClientHome} from "../../components/home-page"
-import {EmpresaHome} from "../../components/home-page"
+import {AdminHome} from "../../components/home-page/admin-home.jsx"
+import {ClientHome} from "../../components/home-page/client-home.jsx"
+import {EmpresaHome} from "../../components/home-page/empresa-home.jsx"
 
 export const UserTypeProtectionHome = () =>{
 
