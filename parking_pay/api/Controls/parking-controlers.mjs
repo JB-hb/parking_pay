@@ -1,6 +1,7 @@
 import {auth_module} from "../Modules/parking-auth-module.mjs" 
 import {ticket_module} from "../Modules/parking-ticket-module.mjs" 
 import {sucursales_module} from "../Modules/parking-sucursal-module.mjs" 
+import {pay_module} from "../Modules/parking-pay-module.mjs" 
 
 export class parking_controlers{
 
@@ -34,6 +35,22 @@ export class parking_controlers{
 		res.json(reponse);
 	}
 
+	//pay
+	
+	static async parking_pay_ticket(req, res){
+		const {id_cli, id_ticket} = req.params
+		const response = await pay_module.pay_ticket(id_ticket, id_cli);
+		res.json(response);
+	}
+
+	static async parking_pay_balance(req, res){
+		const {id_cli} = req.params
+		const {data} = req.body
+		const response = await pay_mocule.add_to_balance(id_cli, data);
+		res.json(response);
+	}
+
+
 	//sucursales
 	
 	static async parking_sucursales_emp(req, res){
@@ -60,6 +77,12 @@ export class parking_controlers{
 		const {data} = req.body
 		const response = await sucursales_module.create_sucursal(id_emp, data.name, data.tarifa, data.type);
 		res.json(reponse);
+	}
+
+	static async get_sucursales_list(req, res){
+		const {first, interval} = req.params
+		const response = await sucursales_module.get_lista_sucursales(first, interval);
+		res.json(response);
 	}
 
 	//tickets

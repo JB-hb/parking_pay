@@ -6,40 +6,23 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 export class pay_module(){
 
-	static async add_to_balance(amount, id){
+	static async add_to_balance(id_client, data){
 
 		try{
 
-			const {data: balance, error: user_error} = await supabase
-				.from("Clients")
-				.select("Saldo")
-				.eq("id", id)
+			const {statusText: deposit_status, error: user_error} = await supabase
+				.from("Pagos")
+				.insert(data)
 
 			if(user_error){
 				return {error: "error connecting to database"}
 			}
 
-			if(balance.length == 0){
+			if(deposit_status != "Created"){
 				return {error: "cant find the user"}
 			}
 
-			const new_balance = balance[0].Saldo + amount;
-
-			const {statusText: pay, error: error_pay} = await supabase
-				.from("Clients")
-				.update({Saldo: new_balance})
-				.select("Saldo")
-				.eq("id",id)
-
-			if(error_pay){
-				return {error: "error connecting to database"}
-			}
-
-			if(pay != "OK"){
-				return {error: "error updating balance"}
-			}
-
-			return {statusText: "Completed", newBalance: new_balance};
+			return {statusText: "Completed"};
 
 		}catch(error){
 			return {error: "error connecting to database"}

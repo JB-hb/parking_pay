@@ -11,9 +11,9 @@ parking_router.get("/login", parking_controlers.parking_auth_login)
 
 //Clients Routes
 
-//parking_router.get("/cli/:id_cli/balance", /*controler*/);
-//parking_router.patch("/cli/:id_cli/pay/:id_ticket", /*controler*/);
-//parking_router.get("/cli/sucursales", /*controler*/);
+parking_router.patch("/cli/:id_cli/add-balance", parking_controlers.parking_pay_balance);
+parking_router.patch("/cli/:id_cli/pay/:id_ticket", parking_controlers.parking_pay_ticket);
+parking_router.get("/cli/sucursales/:first/:interval", parking_controlers.get_sucursales_list);
 
 //Empresas Routes
 
