@@ -9,6 +9,7 @@ export class auth_module{
 	static async login (mail, password){
 
 		try{
+
 			const {data : user, error} = await supabase
 				.from("Users")
 				.select("*")
@@ -32,7 +33,7 @@ export class auth_module{
 
 						const {data : auth_data, error: errorEmp} = await supabase
 							.from("Empresas")
-							.select("Id, Name") 
+							.select("id, Name") 
 							.eq("Id_User", user[0].id);
 						auth = {...auth_data[0], type: user[0].Type};
 
