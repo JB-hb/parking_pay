@@ -6,7 +6,7 @@ export const parking_router = Router();
 //All Routes
 
 parking_router.get("/login", parking_controlers.parking_auth_login)
-//parking_router.post("/register", /* controler */);
+parking_router.post("/register", /* controler */);
 //parking_router.get("/ticket/:id", /*controler*/);
 
 //Clients Routes

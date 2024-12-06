@@ -11,11 +11,11 @@ export const PageRoutes = () => {
 			<AuthContextProvider>
 				<Routes>
 					<Route
-						path = '/login'
+						path = '/parking/login'
 						element = {<LoginForm/>}
 					/>
 					<Route 
-						path = '/'
+						path = '/parking'
 						element = {
 							<ProtectAuth>
 								{/*componente select homepage*/}

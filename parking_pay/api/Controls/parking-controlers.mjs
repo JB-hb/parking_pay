@@ -18,16 +18,17 @@ export class parking_controlers{
 	static async parking_auth_register(req, res){
 
 		const {mail, password, name} = req.body;
-		const response = "" //modulo de registro de usuario cliente
+		const response = await auth_module.register(mail, password, name) //modulo de registro de usuario cliente
+		res.json(response);
 	}
 
 	static async parking_auth_registerAdmin(req, res){
 
-		const {type, mail, password, name} = req.body
+		const {type, mail, password, name, ci} = req.body
 		const type_options = ["cli", "emp", "adm"];
 
 		if(type_options.includes(type)){
-			const response = "" //modulo de registro 
+			const response = await auth_module.register(mail, password, name, ci != undefined ? ci : 0, type) //modulo de registro 
 		}else{
 			const response = {error: "tipo de usuario invalido"};
 		}
