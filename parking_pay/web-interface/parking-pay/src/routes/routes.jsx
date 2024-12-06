@@ -18,7 +18,7 @@ export const PageRoutes = () => {
 						path = '/parking'
 						element = {
 							<ProtectAuth>
-								{/*componente select homepage*/}
+								<p>hola</p>
 							</ProtectAuth>
 						}
 					/>

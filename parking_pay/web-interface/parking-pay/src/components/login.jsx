@@ -17,7 +17,7 @@ export const LoginForm = () => {
 		const response = await login(data);
 		setError(curr => curr = null);
 		if(response.statusText){
-			direct("/");
+			direct("/parking");
 		}
 		setError(curr => curr = response.error);
 	}

@@ -8,12 +8,15 @@ export const ProtectAuth = ({children}) => {
 	const direct = useNavigate();
 
 	useEffect(() => {
-		if(user != null){
-			return (<>{children}</>);
-		}else{
-			return direct("/parking/login"); 
+		if(user == null){
+			direct("/parking/login"); 
 		}
 	},[])
 
+	return(
+		<>
+			{children}
+		</>
+	)
 	
 }
