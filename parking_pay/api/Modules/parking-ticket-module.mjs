@@ -4,7 +4,7 @@ const supabaseUrl = 'https://pnrwnkawoavhugcwrmsa.supabase.co'
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBucndua2F3b2F2aHVnY3dybXNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIyMTkzODUsImV4cCI6MjA0Nzc5NTM4NX0.tv3BNEcVfrKFlIzmrNFaXrIbCSHP4U7fU6GuQLBNCIE'
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-export class ticket_module(){
+export class ticket_module{
 
 	static async generate_ticket(id_client, id_sucursal){
 
