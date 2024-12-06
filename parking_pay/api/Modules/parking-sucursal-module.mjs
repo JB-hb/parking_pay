@@ -84,9 +84,73 @@ export class sucursales_module(){
 
 		try{
 
+			const { data: sucursal, error: sucursal_error } = await supabase
+				.from("Sucursales")
+				.select("*")
+				.eq("id", id_sucursal)
+
+			if(sucursal_error){
+				return{error: "error connecting to database"};
+			}
+
+			if(sucursal && sucursal.length == 0){
+				return {error: "cant find sucursal"}
+			}
+
+			return {data: sucursal[0]};
+
 		}catch(error){
 			return {error: "error connecting to database"};
 		}
+	}
+
+	static async get_lista_sucursales(inicio, intervalo){
+
+		try{
+
+			const { data: sucursales, error: sucursales_error } = await supabase
+				.from("Sucursales")
+				.select("*")
+				.range(inicio, inicio + intervalo)
+
+			if(sucursales_error){
+				return {error: "error connecting to database"};
+			}
+
+			if(sucursales && sucursales.length == 0){
+				return {error: "cant find sucursales"}
+			}
+
+			return {data: sucursales};
+
+		}catch(error){
+			return {error: "error connecting to database"};
+		}
+
+	}
+
+	static async get_sucursales_empresa(id_empresa){
+
+		try{
+
+			const { data: lista_sucursales, error: error_sucursales } = await supabase
+				.from("Sucursales")
+				.select("*")
+				.eq("Id_Empresa", id_empresa)
+
+			if(error_sucursales){
+				return {error: "error connecting to database"};
+			}
+			if(lista_sucursales && lista_sucursales.length == 0){
+				return {error: "cant find sucursales"}
+			}
+
+			return {data: lista_sucursales};
+
+		}catch(error){
+			return {error: "error connecting to database"}
+		}
+
 	}
 
 }

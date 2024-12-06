@@ -17,11 +17,16 @@ parking_router.get("/login", parking_controlers.parking_auth_login)
 
 //Empresas Routes
 
-//parking_router.post("/emp/:id_emp/register-suc", /*controler*/);
-//parking_router.get("/emp/:id_emp/sucursales", /*controler*/);
-//parking_router.patch("/emp/:id_emp/sucursales/patch/:id_sucur", /*controler*/);
-//parking_router.post("/emp/:id_emp/sucursales/delete/:id_sucur", /*controler*/);
-//parking_routes.get("/emp/admin-info", /*controler*/);
+parking_router.post("/emp/:id_emp/register-suc", parking_controlers.parking_sucursales_create);
+parking_router.get("/emp/:id_emp/sucursales", parking_controlers.parking_sucursales_emp);
+parking_router.patch("/emp/:id_emp/sucursales/patch/:id_sucur", parking_controlers.parking_sucursal_update);
+parking_router.post("/emp/:id_emp/sucursales/delete/:id_sucur", parking_controlers.parking_sucursal_delete);
+
+//Ticket 
+
+parking_router.post("/ticket/:id_client/:id_sucursal", parking_controlers.parking_ticket_generate);
+parking_router.patch("/ticket/:id_ticket/:new_status", parking_controlers.parking_ticket_changes_status);
+parking_router.patch("/ticket/:ticket_id", parking_controlers.parking_ticket_use);
 
 //Admin Routes
 
