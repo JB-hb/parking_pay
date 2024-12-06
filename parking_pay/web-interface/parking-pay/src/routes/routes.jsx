@@ -3,6 +3,7 @@ import {Routes, Route} from "react-router-dom"
 import {AuthContextProvider} from "../contexts/auth_context.jsx"
 import {LoginForm} from "../components/login.jsx"
 import {ProtectAuth} from "./protections/auth-protection.jsx"
+import { UserTypeAdmProtection, UserTypeProtectionHome } from "./protections/user-type-protection.jsx"
 
 
 export const PageRoutes = () => {
@@ -18,7 +19,7 @@ export const PageRoutes = () => {
 						path = '/parking'
 						element = {
 							<ProtectAuth>
-								<p>hola</p>
+								{<UserTypeProtectionHome/>}
 							</ProtectAuth>
 						}
 					/>
