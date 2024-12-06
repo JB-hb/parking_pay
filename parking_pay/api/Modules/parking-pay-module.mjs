@@ -40,7 +40,7 @@ export class pay_module{
 				.eq("id", ticket_id)
 
 			if(error_ticket){
-				return {error: "error connecting to database'};
+				return {error: "error connecting to database"};
 			}
 
 			if(ticket && ticket.length == 0){
@@ -170,7 +170,7 @@ export class pay_module{
 				.eq("id", deposit[0].Client_Id)
 			
 			if(error_saldo){
-				return {error: "error connecting to database};
+				return {error: "error connecting to database"};
 			}
 
 			if(client_saldo && client_saldo.length == 0){
@@ -190,7 +190,7 @@ export class pay_module{
 				return {error: "error updating balance"};
 			}
 
-			const { statusText: deposit_status, error update_depsoit_error} = await supabase
+			const { statusText: deposit_status, error: update_deposit_error} = await supabase
 				.from ("Pagos")
 				.update({Status: "confirmed"})
 				.eq("id", deposit_id)

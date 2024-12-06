@@ -17,7 +17,7 @@ parking_router.get("/cli/sucursales/:first/:interval", parking_controlers.get_su
 
 //Empresas Routes
 
-parking_router.post("/emp/:id_emp/register-suc", parking_controlers.parking_sucursales_create);
+parking_router.post("/emp/:id_emp/register-suc", parking_controlers.parking_sucursal_create);
 parking_router.get("/emp/:id_emp/sucursales", parking_controlers.parking_sucursales_emp);
 parking_router.patch("/emp/:id_emp/sucursales/patch/:id_sucur", parking_controlers.parking_sucursal_update);
 parking_router.post("/emp/:id_emp/sucursales/delete/:id_sucur", parking_controlers.parking_sucursal_delete);
