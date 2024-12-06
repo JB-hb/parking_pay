@@ -13,7 +13,7 @@ parking_router.post("/register", parking_controlers.parking_auth_register);
 parking_router.patch("/cli/:id_cli/add-balance", parking_controlers.parking_pay_balance);
 parking_router.patch("/cli/:id_cli/pay/:id_ticket", parking_controlers.parking_pay_ticket);
 parking_router.get("/cli/sucursales/:first/:interval", parking_controlers.get_sucursales_list);
-parking_router.get("/cli/
+parking_router.get("/cli/ticket/unpaid/:id_client", parking_controlers.get_unpaid_ticket);
 
 //Empresas Routes
 

@@ -106,4 +106,32 @@ export class ticket_module{
 
 	}
 
+	static async get_unpaid_ticket(id_client){
+		
+		try{
+
+			const { data: ticket, error: error_ticket } = await supabase
+				.from("Tickets")
+				.select("*")
+				.eq("Id_Client", id_client)
+				.eq("Status", "Active")
+
+			if(error_ticket){
+				return {error: "error connecting to database"}
+			}
+
+			if(ticket && ticket.length == 0){
+				return {error: "cant find ticket"}
+			}
+
+			return {data: ticket[0]};
+
+			
+
+		}catch(error){
+			return {error: "error connecting to database"}
+		}
+
+	}
+
 }

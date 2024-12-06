@@ -107,8 +107,13 @@ export class parking_controlers{
 	static async parking_ticket_use(req, res){
 		const {ticket_id} = req.params
 		const response = await ticket_module.use_ticket(ticket_id);
+		res.json(response);
 	}
 
-	//Todo: get_unpaid_tickets
+	static async get_unpaid_ticket(req, res){
+		const { id_client } = req.params
+		const response = await ticket_module.get_unpaid_ticket(id_client);
+		res.json(response);
+	}
 
 }
