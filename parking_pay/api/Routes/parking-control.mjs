@@ -30,4 +30,4 @@ parking_router.patch("/ticket/:ticket_id", parking_controlers.parking_ticket_use
 
 //Admin Routes
 
-parking_routes.post("/adm/creae-user", parking_controlers.parking_auth_registerAdmin);
+parking_router.post("/adm/creae-user", parking_controlers.parking_auth_registerAdmin);
