@@ -53,10 +53,10 @@ export const AdminHome = () => {
           <Typography variant="h5" gutterBottom>
             Administrador:{" "}
             <span style={{ color: "#1976D2", fontWeight: "bold" }}>
-              {user.AdminName}
+              {user.Name}
             </span>
           </Typography>
-          <Typography variant="body1">Nombre de Administrador: {user.Nombre}</Typography>
+          <Typography variant="body1">Nombre de Administrador: {user.Name}</Typography>
         </Paper>
 
         {/* Botones */}
@@ -89,6 +89,7 @@ export const AdminHome = () => {
                 bgcolor: "#1976D2",
                 "&:hover": { bgcolor: "#115293" },
                 height: "56px",
+                fontSize: "13px"
               }}
               onClick={() => console.log("Cambiar Estado de Ticket")}
             >

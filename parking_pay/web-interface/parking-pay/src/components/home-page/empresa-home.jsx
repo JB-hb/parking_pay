@@ -53,10 +53,10 @@ export const EmpresaHome = () => {
           <Typography variant="h5" gutterBottom>
             Empresa:{" "}
             <span style={{ color: "#1976D2", fontWeight: "bold" }}>
-              {user.CompanyName}
+              {user.Name}
             </span>
           </Typography>
-          <Typography variant="body1">ID de Empresa: {user.CompanyID}</Typography>
+          <Typography variant="body1">ID de Empresa: {user.Name}</Typography>
         </Paper>
 
         {/* Botones */}
