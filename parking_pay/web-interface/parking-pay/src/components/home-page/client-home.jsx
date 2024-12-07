@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useAuth } from "../../contexts/auth_context.jsx";
 import Navbar from "../Navbar.jsx"; // Ajusta la ruta si es necesario
@@ -17,6 +18,7 @@ import {
   ListItemText,
 } from "@mui/material";
 
+const API_URL = "http://localhost:1234";
 export const ClientHome = () => {
   const { user } = useAuth();
 
@@ -35,6 +37,28 @@ export const ClientHome = () => {
     { id: 1, descripcion: "Ticket 001 - $50" },
     { id: 2, descripcion: "Ticket 002 - $100" },
   ];
+
+  const apiClient = {
+    // Autenticación
+    login: (credentials) => axios.get(`${API_URL}/login`, { params: credentials }),
+    register: (data) => axios.post(`${API_URL}/register`, data),
+  
+    // Operaciones de cliente
+    addBalance: (id, amount) =>
+      axios.patch(`${API_URL}/cli/${id}/add-balance`, { amount }),
+    payTicket: (idCli, idTicket) =>
+      axios.patch(`${API_URL}/cli/${idCli}/pay/${idTicket}`),
+    getUnpaidTickets: (idClient) =>
+      axios.get(`${API_URL}/cli/ticket/unpaid/${idClient}`),
+    getSucursales: (first, interval) =>
+      axios.get(`${API_URL}/cli/sucursales/${first}/${interval}`),
+  
+    // Ticket
+    generateTicket: (idClient, idSucursal) =>
+      axios.post(`${API_URL}/ticket/${idClient}/${idSucursal}`),
+    changeTicketStatus: (idTicket, newStatus) =>
+      axios.patch(`${API_URL}/ticket/${idTicket}/${newStatus}`),
+  };
 
   // Handlers para abrir/cerrar modales
   const handleCloseAbonar = () => setOpenAbonar(false);
@@ -168,14 +192,21 @@ export const ClientHome = () => {
         <DialogActions>
           <Button onClick={handleCloseAbonar}>Cancelar</Button>
           <Button
-            onClick={() => {
-              console.log(`Abonaste: ${abono}`);
-              setAbono(""); // Resetea el input
-              handleCloseAbonar();
-            }}
-          >
-            Confirmar
-          </Button>
+                onClick={async () => {
+                    try {
+                        const response = await apiClient.addBalance(user.id, parseFloat(abono));
+                        console.log(response)
+                        alert("Abono realizado con éxito");
+                        setAbono(""); // Limpia el input
+                        handleCloseAbonar();
+                        } catch (error) {
+                        console.error(error);
+                        alert("Error al realizar el abono");
+                    }
+                }}
+                >
+                Confirmar
+            </Button>
         </DialogActions>
       </Dialog>
 
