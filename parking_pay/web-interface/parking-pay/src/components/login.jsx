@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../contexts/auth_context.jsx";
 import { useNavigate } from "react-router-dom";
 import { Box, Typography, TextField, Button, Paper } from "@mui/material";
+import logo from "../assets/logo-ppay.png"; // Asegúrate de ajustar la ruta si es necesario
 
 export const LoginForm = () => {
   const { login } = useAuth();
@@ -43,6 +44,7 @@ export const LoginForm = () => {
         overflow: "hidden",
       }}
     >
+
       {/* Formulario de Login */}
       <Paper
         elevation={4}
@@ -75,7 +77,17 @@ export const LoginForm = () => {
             {error}
           </Typography>
         )}
-
+        {/* Logo */}
+        <Box
+            component="img"
+            src={logo}
+            alt="Logo"
+            sx={{
+                width: "300px", // Tamaño inicial del logo
+                maxWidth: "80%", // Ajuste responsivo
+                borderRadius: "30px"
+            }}
+        />
         <Box component="form" onSubmit={submitLogin} sx={{ width: "100%" }}>
           <TextField
             label="Correo Electrónico"

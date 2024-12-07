@@ -1,12 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../contexts/auth_context.jsx";
-import Navbar from "../Navbar.jsx"; // Asegúrate de ajustar la ruta si es necesario
-import { Box, Typography, Button, Grid, Paper } from "@mui/material";
+import Navbar from "../Navbar.jsx"; // Ajusta la ruta si es necesario
+import {
+  Box,
+  Typography,
+  Button,
+  Grid,
+  Paper,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  List,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
 
 export const ClientHome = () => {
   const { user } = useAuth();
 
-  console.log(user);
+  // Estados para los modales
+  const [openAbonar, setOpenAbonar] = useState(false);
+  const [openPagarTicket, setOpenPagarTicket] = useState(false);
+  const [openGenerarTicket, setOpenGenerarTicket] = useState(false);
+
+  // Estados para inputs
+  const [abono, setAbono] = useState("");
+  const [facturaPago, setFacturaPago] = useState("");
+  const [facturaGenerar, setFacturaGenerar] = useState("");
+
+  // Datos de ejemplo para los tickets
+  const tickets = [
+    { id: 1, descripcion: "Ticket 001 - $50" },
+    { id: 2, descripcion: "Ticket 002 - $100" },
+  ];
+
+  // Handlers para abrir/cerrar modales
+  const handleCloseAbonar = () => setOpenAbonar(false);
+  const handleClosePagarTicket = () => setOpenPagarTicket(false);
+  const handleCloseGenerarTicket = () => setOpenGenerarTicket(false);
+
   return (
     <Box
       sx={{
@@ -50,6 +84,8 @@ export const ClientHome = () => {
             color: "#01015C",
           }}
         >
+          <Typography variant="body1">Nombre: {user.Name}</Typography>
+
           <Typography variant="h5" gutterBottom>
             Saldo Disponible:{" "}
             <span style={{ color: "#1976D2", fontWeight: "bold" }}>
@@ -75,7 +111,7 @@ export const ClientHome = () => {
                 "&:hover": { bgcolor: "#115293" },
                 height: "56px",
               }}
-              onClick={() => console.log("Abonar")}
+              onClick={() => setOpenAbonar(true)}
             >
               Abonar
             </Button>
@@ -90,7 +126,7 @@ export const ClientHome = () => {
                 "&:hover": { bgcolor: "#115293" },
                 height: "56px",
               }}
-              onClick={() => console.log("Pagar Ticket")}
+              onClick={() => setOpenPagarTicket(true)}
             >
               Pagar Ticket
             </Button>
@@ -106,13 +142,107 @@ export const ClientHome = () => {
                 "&:hover": { bgcolor: "#115293" },
                 height: "56px",
               }}
-              onClick={() => console.log("Generar Ticket")}
+              onClick={() => setOpenGenerarTicket(true)}
             >
               Generar Ticket
             </Button>
           </Grid>
         </Grid>
       </Box>
+
+      {/* Modal Abonar */}
+      <Dialog open={openAbonar} onClose={handleCloseAbonar}>
+        <DialogTitle>Abonar a tu saldo</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Monto a abonar"
+            type="number"
+            fullWidth
+            variant="outlined"
+            value={abono}
+            onChange={(e) => setAbono(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseAbonar}>Cancelar</Button>
+          <Button
+            onClick={() => {
+              console.log(`Abonaste: ${abono}`);
+              setAbono(""); // Resetea el input
+              handleCloseAbonar();
+            }}
+          >
+            Confirmar
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Modal Pagar Ticket */}
+      <Dialog open={openPagarTicket} onClose={handleClosePagarTicket}>
+        <DialogTitle>Pagar Ticket</DialogTitle>
+        <DialogContent>
+          <List>
+            {tickets.map((ticket) => (
+              <ListItem key={ticket.id}>
+                <ListItemText primary={ticket.descripcion} />
+              </ListItem>
+            ))}
+          </List>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Factura"
+            type="text"
+            fullWidth
+            variant="outlined"
+            value={facturaPago}
+            onChange={(e) => setFacturaPago(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClosePagarTicket}>Cancelar</Button>
+          <Button
+            onClick={() => {
+              console.log(`Pagaste con factura: ${facturaPago}`);
+              setFacturaPago(""); // Resetea el input
+              handleClosePagarTicket();
+            }}
+          >
+            Confirmar
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Modal Generar Ticket */}
+      <Dialog open={openGenerarTicket} onClose={handleCloseGenerarTicket}>
+        <DialogTitle>Generar Ticket</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Factura"
+            type="text"
+            fullWidth
+            variant="outlined"
+            value={facturaGenerar}
+            onChange={(e) => setFacturaGenerar(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseGenerarTicket}>Cancelar</Button>
+          <Button
+            onClick={() => {
+              console.log(`Generaste ticket con factura: ${facturaGenerar}`);
+              setFacturaGenerar(""); // Resetea el input
+              handleCloseGenerarTicket();
+            }}
+          >
+            Confirmar
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       {/* Footer */}
       <Box
